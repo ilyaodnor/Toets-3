@@ -1,5 +1,6 @@
 from functions import*
 from data import *
+import math
 
 clear_screen()
 
@@ -24,14 +25,20 @@ while True:
     else:
         print('Ik snap dat niet.')
         time.sleep(1)
-text = '------ [UW BESTELLING] ------'
+
+#berekening
+
 zaken_olibollen = olibollen//10
+
 if zaken_olibollen>0:   totaal = (zaken_olibollen * OLIBOLLEN_ZAK + (olibollen - 10 * zaken_olibollen) * OLIBOLLEN +  appelflap * APPELFLAP )
 else:                   totaal = olibollen*OLIBOLLEN+appelflap*APPELFLAP
 
 if totaal >=50:         
     korting = True
     verschil = totaal/100*KORTING
+
+
+#bestelling
 
 print(text)
 if zaken_olibollen > 0:
@@ -44,8 +51,13 @@ elif olibollen > 0 and zaken_olibollen == 0:
 if appelflap > 0:
     print(f'Appelflap:         {appelflap:2} x €{APPELFLAP:.2f} = €{round(appelflap * APPELFLAP, 2):6.2f}')
 
+
+#Totaal
 print('-' * len(text) + '+')
 print(f'Subtotaal: {round(totaal,2):6.2f}')
 if korting: print(f'Korting(7.5%): -€{verschil:6.2f}')
+else: pass
+
 print('-' * len(text) + '+')
 print(f'Totaal:                 €{round(totaal-verschil, 2):6.2f}')
+print(f'BTW (9%):               €{round((totaal - verschil) / 100 * BTW, 2):>6.2f}')
