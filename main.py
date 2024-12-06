@@ -25,10 +25,24 @@ while True:
         print('Ik snap dat niet.')
         time.sleep(1)
 text = '------ [UW BESTELLING] ------'
-totaal = olibollen*OLIBOLLEN+appelflap*APPELFLAP
+zaken_olibollen = olibollen//10
+if zaken_olibollen>0:
+   totaal = (
+    zaken_olibollen * OLIBOLLEN_ZAK + 
+    (olibollen - 10 * zaken_olibollen) * OLIBOLLEN +  
+    appelflap * APPELFLAP 
+)
+else:
+    totaal = olibollen*OLIBOLLEN+appelflap*APPELFLAP
+
 
 print(text)
-if olibollen>0: print(f'Olibollen:   {olibollen} x €{OLIBOLLEN} = €{round(olibollen*OLIBOLLEN, 2)}')
-if appelflap>0: print(f'Appelflap: {appelflap} x €{APPELFLAP} = €{round(APPELFLAP* OLIBOLLEN, 2)}')
-print('-'*len(text)+'+')
-print(f'Totaal:                €{round(totaal, 2)} ')  
+if zaken_olibollen > 0:
+    print(f'Olibollen (zak):   {zaken_olibollen:2} x €{OLIBOLLEN_ZAK:.2f} = €{round(zaken_olibollen * OLIBOLLEN_ZAK, 2):6.2f}')
+    print(f'Olibollen (los):   {olibollen - 10 * zaken_olibollen:2} x €{OLIBOLLEN:.2f} = €{round((olibollen - 10 * zaken_olibollen) * OLIBOLLEN, 2):6.2f}')
+elif olibollen > 0 and zaken_olibollen == 0:
+    print(f'Olibollen (los):   {olibollen:2} x €{OLIBOLLEN:.2f} = €{round(olibollen * OLIBOLLEN, 2):6.2f}')
+if appelflap > 0:
+    print(f'Appelflap:         {appelflap:2} x €{APPELFLAP:.2f} = €{round(appelflap * APPELFLAP, 2):6.2f}')
+print('-' * len(text) + '+')
+print(f'Totaal:                 €{round(totaal, 2):6.2f}')
