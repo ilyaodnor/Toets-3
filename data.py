@@ -1,3 +1,6 @@
 OLIBOLLEN = 1.15
 APPELFLAP = 1.60
 OLIBOLLEN_ZAK = 10.00 
+KORTING = 7.5
+
+active_korting = False
