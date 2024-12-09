@@ -1,4 +1,4 @@
-import time, os, sys
+import time, os, sys,math
 from data import* 
 def input_check(text, type, expected: list = None): 
     while True:
@@ -36,3 +36,23 @@ def clear_screen():
     time.sleep(2)
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def bereken_wachttijd(olibollen, appelflappen):
+    wachttijd = 0
+    olibollen_copy_bakken = olibollen
+    olibollen_copy_verpakken = olibollen
+  
+    while olibollen_copy_bakken > 0:
+        olibollen_copy_bakken -= 15  
+        wachttijd += 75  
+
+    while olibollen_copy_verpakken > 0:
+        olibollen_copy_verpakken -= 10  
+        wachttijd += 15  
+
+    while appelflappen > 0:
+        appelflappen -= 3  
+        wachttijd += 20  
+
+ 
+    wachttijd_in_minuten = math.ceil(wachttijd/60)
+    return wachttijd_in_minuten
